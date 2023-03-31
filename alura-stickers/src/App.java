@@ -1,4 +1,6 @@
+import java.io.InputStream;
 import java.net.URI;
+import java.net.URL;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -25,23 +27,36 @@ public class App {
         List<Map<String, String>> listaDeFilmes = parser.listaDeFilmes(body);
 
         // exibir e manipular os dados
+        var geradora = new GeradoraDeFigurinhas();
         for (Map<String, String> filme : listaDeFilmes) {
             // System.out.println(filme.get("title"));
             // System.out.println(filme.get("image"));
             // System.out.println(filme.get("imDbRating"));
             // System.out.println();
 
-            System.out.println("\u001b[1m" + "\u001b[36m" + filme.get("title"));
-            System.out.println(filme.get("image"));
-            System.out.println(filme.get("imDbRating"));
-            double rating = Double.parseDouble(filme.get("imDbRating")); // Convertendo a string em double
-            int star = (int) rating; // Convertendo o double em int
-            for (int i = 0; i <= star; i++) { // Escrevendo estrelas na classificação o "<=" é para arredondar conforme
-                                              // solicitado
-                System.out.print("⭐");
+            String urlImagem = filme.get("image");
+            String titulo = filme.get("title");
 
-            }
-            System.out.println("\n");
+            InputStream inputStream = new URL(urlImagem).openStream();
+            String nomeArquivo = titulo + ".png";
+
+            geradora.cria(inputStream, nomeArquivo);
+
+            // System.out.println("\u001b[1m" + "\u001b[36m" + filme.get("title"));
+            // System.out.println(filme.get("image"));
+            System.out.println(filme.get(titulo));
+
+            // double rating = Double.parseDouble(filme.get("imDbRating")); // Convertendo a
+            // string em double
+            // int star = (int) rating; // Convertendo o double em int
+            // for (int i = 0; i <= star; i++) { // Escrevendo estrelas na classificação o
+            // "<=" é para arredondar conforme
+            // solicitado
+            // System.out.print("⭐");
+
+                    System.out.println(body);
+
         }
+        // System.out.println("\n");
     }
 }
