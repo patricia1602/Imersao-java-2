@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public class App {
-    
+
     public static void main(String[] args) throws Exception {
         // System.out.println("Hello, World!");
 
@@ -22,14 +22,26 @@ public class App {
 
         // extrair só os dados que interessam (titulo, poster, classificação)
         var parser = new JsonParser();
-        List<Map<String, String>> listaDeFilmes = parser.parse(body);
+        List<Map<String, String>> listaDeFilmes = parser.listaDeFilmes(body);
 
         // exibir e manipular os dados
         for (Map<String, String> filme : listaDeFilmes) {
-            System.out.println(filme.get("title"));
+            // System.out.println(filme.get("title"));
+            // System.out.println(filme.get("image"));
+            // System.out.println(filme.get("imDbRating"));
+            // System.out.println();
+
+            System.out.println("\u001b[1m" + "\u001b[36m" + filme.get("title"));
             System.out.println(filme.get("image"));
             System.out.println(filme.get("imDbRating"));
-            System.out.println();
+            double rating = Double.parseDouble(filme.get("imDbRating")); // Convertendo a string em double
+            int star = (int) rating; // Convertendo o double em int
+            for (int i = 0; i <= star; i++) { // Escrevendo estrelas na classificação o "<=" é para arredondar conforme
+                                              // solicitado
+                System.out.print("⭐");
+
+            }
+            System.out.println("\n");
         }
     }
 }
