@@ -18,9 +18,11 @@ public class App {
         // String url =
         // "https://raw.githubusercontent.com/alura-cursos/imersao-java-2-api/main/NASA-APOD.json";
         // ExtratorDeConteudo extrator = new ExtratorDeConteudoDaNasa();
-        
+
+        API api = API.NASA;
+
         String url = "http://localhost:8080/linguagens";
-        ExtratorDeConteudo extrator = new ExtratorDeConteudoIMDB();
+        ExtratorDeConteudo extrator = new ExtratorDeConteudoDoIMDB();
 
         var http = new ClienteHttp();
         String json = http.buscaDados(url);

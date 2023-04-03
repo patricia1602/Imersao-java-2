@@ -1,6 +1,11 @@
 package br.com.alura.linguagensapi;
 
-@Document(collection = "principais linguagens")
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.data.annotation.Id;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@RequestMapping("/principais linguagens")
+@EntityScan
 public class Linguagem {
 
     @Id
@@ -9,7 +14,7 @@ public class Linguagem {
     private String image;
     private int ranking;
 
-    public Linguagem(){
+    public Linguagem() {
 
     }
 
@@ -33,6 +38,22 @@ public class Linguagem {
 
     public int getRanking() {
         return ranking;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public void setRanking(int ranking) {
+        this.ranking = ranking;
     }
 
 }
